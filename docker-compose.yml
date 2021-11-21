@@ -1,6 +1,6 @@
 services:
   mongodb:
-    container_name: nomad5711/tp_node_1_mongodb
+    container_name: mongodb
     build: ./
     restart: always
     ports:
