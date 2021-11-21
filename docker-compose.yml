@@ -1,0 +1,27 @@
+services:
+  mongodb:
+    container_name: nomad5711/tp_node_1_mongodb
+    build: ./
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_DATABASE: admin
+      MONGO_INITDB_ROOT_USERNAME: "${USERNAME_MONGO}"
+      MONGO_INITDB_ROOT_PASSWORD: "${USERPWD_MONGO}"
+      USERNAME_MONGO: "${USERNAME_MONGO}"
+      USERPWD_MONGO: "${USERPWD_MONGO}"
+      DBNAME_MONGO: "${DBNAME_MONGO}"
+    volumes:
+      - ./init:/docker-entrypoint-initdb.d/:ro
+
+  mongo-express:
+    container_name: mongoexpress
+    image: mongo-express
+    restart: always
+    ports:
+      - 8082:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: "${USERNAME_MONGO}"
+      ME_CONFIG_MONGODB_ADMINPASSWORD: "${USERPWD_MONGO}"
+      ME_CONFIG_MONGODB_URL: "mongodb://${USERNAME_MONGO}:${USERPWD_MONGO}@mongodb:27017/"
