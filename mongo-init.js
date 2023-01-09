@@ -1,11 +1,5 @@
-db.auth(_getEnv('USERNAME_MONGO'), _getEnv('USERPWD_MONGO'));
-db = db.getSiblingDB(_getEnv('DBNAME_MONGO'));
-db.createCollection("test");
-db.createUser({
-    user: _getEnv('USERNAME_MONGO'),
-    pwd: _getEnv('USERPWD_MONGO'),
-    roles : [{ role: "readWrite", db: _getEnv('DBNAME_MONGO') }]
-});
+db = db.getSiblingDB('Users');
+db.createCollection("users");
 
 db.users.insertMany(
     [
